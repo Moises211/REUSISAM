@@ -21,4 +21,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public boolean Salir(){
+        finish();
+        return  true;
+    }
 }
