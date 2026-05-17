@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".RegistarActivity">
 
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/black"
+        android:checked="false"
+        android:drawableTint="@color/blue"
+        android:foregroundTint="@color/blue"
+        android:textColor="@color/black"
+        app:buttonIcon="@drawable/outline_eye_tracking_24"
+        app:buttonIconTint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/et_ARConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ARConfirmPassword" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAR"
         android:layout_width="0dp"
@@ -129,5 +144,35 @@
         android:text="@string/btnReturn"
         app:layout_constraintStart_toEndOf="@+id/bt_ARSave"
         app:layout_constraintTop_toBottomOf="@+id/et_ARConfirmPassword" />
+
+    <CheckBox
+        android:id="@+id/cb_ARPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/black"
+        android:checked="false"
+        android:drawableTint="@color/blue"
+        android:foregroundTint="@color/blue"
+        android:textColor="@color/black"
+        app:buttonIcon="@drawable/outline_eye_tracking_24"
+        app:buttonIconTint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/et_ARPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ARPassword" />
+
+    <CheckBox
+        android:id="@+id/cb_ARConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/black"
+        android:checked="false"
+        android:drawableTint="@color/blue"
+        android:foregroundTint="@color/blue"
+        android:textColor="@color/black"
+        app:buttonIcon="@drawable/outline_eye_tracking_24"
+        app:buttonIconTint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/et_ARConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ARConfirmPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
