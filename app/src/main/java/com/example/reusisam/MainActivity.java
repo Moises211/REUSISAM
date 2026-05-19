@@ -129,3 +129,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 }
+    public boolean Salir(){
+        finish();
+        return  true;
+    }
+}

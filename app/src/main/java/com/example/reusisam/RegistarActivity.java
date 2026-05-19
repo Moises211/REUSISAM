@@ -142,6 +142,7 @@ public class RegistarActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = preferences.edit();
             RecordDTO record = Verificar();
             String clave = etARName.getText().toString().trim();
+            String clave = etARName.getText().toString();
             String email = etAREmail.getText().toString();
             String password = etARPassword.getText().toString();
             String confirmPassword = etARConfirmPassword.getText().toString();
@@ -188,6 +189,7 @@ public class RegistarActivity extends AppCompatActivity {
 
     public RecordDTO Verificar() {
         String clave = etARName.getText().toString().trim();
+        String clave = etARName.getText().toString();
         String email = etAREmail.getText().toString();
         String password = etARPassword.getText().toString();
         String confirmPassword = etARConfirmPassword.getText().toString();
@@ -237,11 +239,13 @@ public class RegistarActivity extends AppCompatActivity {
             String validatePass;
             //validar contraseña
             if (!((validatePass = PasswordValidated(password)).isEmpty())) {
+            if (!((validatePass = PasswordValidated(password)) == "")) {
                 valores.put("password", validatePass);
                 return new RecordDTO(false, valores, "password");
             }
             //validadar confirmacion de contraseña
             if (!((validatePass = PasswordValidated(confirmPassword)).isEmpty())) {
+            if (!((validatePass = PasswordValidated(confirmPassword)) == "")) {
                 valores.put("confirmPassword", validatePass);
                 return new RecordDTO(false, valores, "confirmPassword");
             }
