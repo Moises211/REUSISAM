@@ -4,14 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -24,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText etAMPassword;
     private TextView tvAMStatus;
     private Button btAMLogin;
-    private Button btAMRegister;
+    //private Button btAMRegister;
     private Button btAMExit;
+    private CheckBox cbAMPassword;
+    private Toolbar toolbar;
     private SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +46,19 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+
         etAMUser = findViewById(R.id.et_AMUser);
         etAMPassword = findViewById(R.id.et_AMPassword);
         tvAMStatus = findViewById(R.id.tv_AMStatus);
         btAMLogin = findViewById(R.id.bt_AMLogin);
-        btAMRegister = findViewById(R.id.bt_AMRegister);
+        //btAMRegister = findViewById(R.id.bt_AMRegister);
         btAMExit = findViewById(R.id.bt_AMExit);
+        cbAMPassword = findViewById(R.id.cb_AMPassword);
+
+        toolbar = findViewById(R.id.toolbarAR);
+        toolbar.setTitle("Login de Usuario");
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
+        setSupportActionBar(toolbar);
 
         preferences = getSharedPreferences("users", Context.MODE_PRIVATE);
 
@@ -50,17 +69,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btAMRegister.setOnClickListener(new View.OnClickListener() {
+        /*btAMRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AbrirRegistro();
             }
-        });
+        });*/
 
         btAMExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Salir();
+            }
+        });
+
+        cbAMPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    etAMPassword.setTransformationMethod(android.text.method.HideReturnsTransformationMethod.getInstance());
+                }else{
+                    etAMPassword.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
+                }
             }
         });
 
@@ -118,6 +148,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return "";
     }
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int idmenu = item.getItemId();
+        if(idmenu == R.id.btnRegistrar_menu){
+            AbrirRegistro();
+            return true;
+        }
+        if(idmenu == R.id.btnSalir_menu ) return Salir();
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void AbrirRegistro() {
         Intent intent = new Intent(this, RegistarActivity.class);
@@ -125,12 +172,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean Salir() {
-        finish();
+        finishAffinity();
         return true;
     }
 }
-    public boolean Salir(){
-        finish();
-        return  true;
-    }
-}
+
+

@@ -19,11 +19,7 @@
         <activity
             android:name=".RegistarActivity"
             android:exported="false" />
-
-            android:exported="false"
-            />
-
-        <activity
+        <!--activity
             android:name=".RegistarActivity"
             android:exported="true"
             >
@@ -32,7 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
