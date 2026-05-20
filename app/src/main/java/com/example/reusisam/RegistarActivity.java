@@ -308,6 +308,7 @@ public class RegistarActivity extends AppCompatActivity {
         etAREmail.getText().clear();
         etARPassword.getText().clear();
         etARConfirmPassword.getText().clear();
+
     }
 
 }
