@@ -119,8 +119,19 @@ public class RegistarActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_registrar, menu);
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int idmenu = item.getItemId();
+
+        if(idmenu == R.id.btnSalir_MenuRegistrar) {
+            finishAffinity();
+        };
+
+        return super.onOptionsItemSelected(item);
     }
 
     public boolean Regresar() {
@@ -141,7 +152,8 @@ public class RegistarActivity extends AppCompatActivity {
             preferences = getSharedPreferences("users", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             RecordDTO record = Verificar();
-            String clave = etARName.getText().toString();
+            String clave = etARName.getText().toString().trim();
+
             String email = etAREmail.getText().toString();
             String password = etARPassword.getText().toString();
             String confirmPassword = etARConfirmPassword.getText().toString();
@@ -150,28 +162,28 @@ public class RegistarActivity extends AppCompatActivity {
             if (!record.estado) {
                 System.out.println("Click en guardar 2: " + record.valores);
                 if (record.valores.isEmpty()) {
-                    System.out.println("Click en guardar usuario");
+                    //System.out.println("Click en guardar usuario");
                     etARName.setError(record.clave);
                     return false;
                 }
                 if (record.valores.get("email") != null && record.clave.equals("email")) {
-                    System.out.println("Click en guardar email");
+                    //System.out.println("Click en guardar email");
                     etAREmail.setError(record.valores.get("email"));
                     return false;
                 }
                 if (record.valores.get("password") != null && record.clave.equals("password")) {
-                    System.out.println("Click en guardar passw");
+                    //System.out.println("Click en guardar passw");
                     etARPassword.setError(record.valores.get("password"));
                     return false;
                 }
                 if (record.valores.get("confirmPassword") != null && record.clave.equals("confirmPassword")) {
-                    System.out.println("Click en guardar confirm");
+                    //System.out.println("Click en guardar confirm");
                     etARConfirmPassword.setError(record.valores.get("confirmPassword"));
                     return false;
                 }
-                System.out.println("Click en guardar 3");
+                //System.out.println("Click en guardar 3");
             } else {
-                System.out.println("Click en guardados ya");
+                //System.out.println("Click en guardados ya");
                 Set<String> datos = new HashSet<>();
                 datos.add("email:" + record.valores.get("email"));
                 datos.add("password:" + record.valores.get("password"));
@@ -187,7 +199,8 @@ public class RegistarActivity extends AppCompatActivity {
     }
 
     public RecordDTO Verificar() {
-        String clave = etARName.getText().toString();
+        String clave = etARName.getText().toString().trim();
+
         String email = etAREmail.getText().toString();
         String password = etARPassword.getText().toString();
         String confirmPassword = etARConfirmPassword.getText().toString();
@@ -236,12 +249,12 @@ public class RegistarActivity extends AppCompatActivity {
             }
             String validatePass;
             //validar contraseña
-            if (!((validatePass = PasswordValidated(password)) == "")) {
+            if (!((validatePass = PasswordValidated(password)).isEmpty())) {
                 valores.put("password", validatePass);
                 return new RecordDTO(false, valores, "password");
             }
             //validadar confirmacion de contraseña
-            if (!((validatePass = PasswordValidated(confirmPassword)) == "")) {
+            if (!((validatePass = PasswordValidated(confirmPassword)).isEmpty())) {
                 valores.put("confirmPassword", validatePass);
                 return new RecordDTO(false, valores, "confirmPassword");
             }
