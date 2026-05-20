@@ -1,9 +1,15 @@
 package com.example.reusisam;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +26,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        toolbar = findViewById(R.id.toolbarAR);
+        toolbar.setTitle("Bienvenido");
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             cargarFragment(new InicioFragment());
@@ -43,6 +54,27 @@ public class HomeActivity extends AppCompatActivity {
 
             return false;
         });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int idmenu = item.getItemId();
+
+        if(idmenu == R.id.nav_cerrarSeccion){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(idmenu == R.id.nav_salir){
+            finishAffinity();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void cargarFragment(Fragment fragment) {
